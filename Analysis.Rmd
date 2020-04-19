@@ -1,0 +1,25 @@
+---
+title: "DataFest 2020: COVID-19 Analysis"
+author: "Alyssa Shi and Drew Flanagan"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning=FALSE, 
+                      message=FALSE)
+```
+
+```{r load-packages}
+library(tidyverse)
+library(broom)
+library(knitr) 
+library(dplyr)
+```
+
+```{r load-data}
+
+```
+
+## Introduction
