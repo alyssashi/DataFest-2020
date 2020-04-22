@@ -88,4 +88,51 @@ Joining datasets:
 covid19_mob <- inner_join(COVID, mobility2)
 ```
 
+```{r}
+glimpse(covid19_mob)
+```
+
 ## Introduction
+
+```{r}
+covid19_mob <- covid19_mob %>%
+  filter(state == "NY" | state == "NJ" | state == "MA" | state == "AZ" | state == "AL"| state == "RI") %>%
+  mutate(sub_region_1 = factor(sub_region_1, levels = c("New York", "New Jersey", "Massachusetts", "Arizona", "Alabama", "Rhode Island")))
+```
+
+```{r}
+covid19_mob %>%
+  ggplot(mapping = aes(x = date)) +
+  geom_line(aes(y = workplace, color = "Workplace")) +
+  geom_line(aes(y = parks, color = "Parks")) +
+  geom_line(aes(y = transit, color = "Transit")) +
+  geom_line(aes(y = retail_rec, color = "Retail and Recreation")) +
+  geom_line(aes(y = groc_pharm, color = "Grocery and Pharmacy")) +
+  geom_line(aes(y = residential, color = "Residential")) +
+  facet_wrap(vars(sub_region_1)) +
+  labs(title = "Change in Mobility Over Time in States Most and Least Affected by COVID-19", 
+       x = "Date", 
+       y = "Percent Change in Mobility", 
+       color = "Type of Location") +
+  theme_bw()
+```
+
+```{r}
+covid19_mob %>%
+  filter(state == "NY") %>%
+  ggplot(mapping = aes(x = date)) +
+  geom_line(aes(y = workplace, color = "Workplace")) +
+  geom_line(aes(y = parks, color = "Parks")) +
+  geom_line(aes(y = transit, color = "Transit")) +
+  geom_line(aes(y = retail_rec, color = "Retail and Recreation")) +
+  geom_line(aes(y = groc_pharm, color = "Grocery and Pharmacy")) +
+  geom_line(aes(y = residential, color = "Residential")) +
+  labs(title = "Change in Mobility Over Time in New York", 
+       x = "Date", 
+       y = "Percent Change in Mobility",
+       color = "Type of Location") +
+  geom_vline(xintercept = as.numeric(ymd("2020-03-22")), linetype = 4) +
+  theme_bw()
+```
+
+parks not decreasing same as others? discuss whether people are still getting infected going to parks despite stay at home order
