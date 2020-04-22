@@ -27,7 +27,9 @@ covidus <- read_csv("Data/us_covid19_daily.csv")
 states <- read_csv("Data/StatesFIPSCodes.csv")
 ```
 
-Data Sources:
+### Data Sources
+
+
 https://www.google.com/covid19/mobility/
 
 
