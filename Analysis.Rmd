@@ -1,6 +1,6 @@
 ---
 title: "DataFest 2020: COVID-19 Analysis"
-author: "Alyssa Shi and Drew Flanagan"
+author: "Team Half-Git Up: Alyssa Shi and Drew Flanagan"
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
@@ -29,10 +29,16 @@ states <- read_csv("Data/StatesFIPSCodes.csv")
 
 Data Sources:
 https://www.google.com/covid19/mobility/
+
+
 https://www.kaggle.com/sudalairajkumar/covid19-in-usa#us_states_covid19_daily.csv
+
+
 https://data.world/uscensusbureau/fips-state-codes
 
-###Data Wrangling
+
+
+### Data Wrangling
 
 Muating states to be able to join other datasets:
 
@@ -102,7 +108,7 @@ glimpse(covid19_mob)
 
 Not all of the variables were used in our analysis!
 
-## Introduction
+### Visualizations
 
 Filtering for top 3/bottom 3 states:
 
