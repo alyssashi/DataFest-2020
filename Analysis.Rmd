@@ -17,6 +17,7 @@ library(broom)
 library(knitr) 
 library(dplyr)
 library(lubridate)
+library(extrafont)
 ```
 
 ```{r load-data}
@@ -25,6 +26,13 @@ covid19 <- read_csv("Data/us_states_covid19_daily.csv")
 covidus <- read_csv("Data/us_covid19_daily.csv")
 states <- read_csv("Data/StatesFIPSCodes.csv")
 ```
+
+Data Sources:
+https://www.google.com/covid19/mobility/
+https://www.kaggle.com/sudalairajkumar/covid19-in-usa#us_states_covid19_daily.csv
+https://data.world/uscensusbureau/fips-state-codes
+
+###Data Wrangling
 
 Muating states to be able to join other datasets:
 
@@ -92,13 +100,19 @@ covid19_mob <- inner_join(COVID, mobility2)
 glimpse(covid19_mob)
 ```
 
+Not all of the variables were used in our analysis!
+
 ## Introduction
+
+Filtering for top 3/bottom 3 states:
 
 ```{r}
 covid19_mob <- covid19_mob %>%
   filter(state == "NY" | state == "NJ" | state == "MA" | state == "AZ" | state == "AL"| state == "RI") %>%
   mutate(sub_region_1 = factor(sub_region_1, levels = c("New York", "New Jersey", "Massachusetts", "Arizona", "Alabama", "Rhode Island")))
 ```
+
+Creating graph comparing states:
 
 ```{r}
 covid19_mob %>%
@@ -117,7 +131,9 @@ covid19_mob %>%
   theme_bw()
 ```
 
-```{r}
+Creating graph for New York:
+
+```{r fig.height = 4, fig.width = 8}
 covid19_mob %>%
   filter(state == "NY") %>%
   ggplot(mapping = aes(x = date)) +
@@ -134,5 +150,3 @@ covid19_mob %>%
   geom_vline(xintercept = as.numeric(ymd("2020-03-22")), linetype = 4) +
   theme_bw()
 ```
-
-parks not decreasing same as others? discuss whether people are still getting infected going to parks despite stay at home order
